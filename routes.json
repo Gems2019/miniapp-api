@@ -1,0 +1,5 @@
+{
+    "/api/courses": "/courses",
+    "/api/courses/:courseId/quizzes": "/quizzes?courseId=:courseId",
+    "/api/quizzes/:quizId": "/quizzes/:quizId"
+  }

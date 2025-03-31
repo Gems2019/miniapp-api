@@ -1,0 +1,49 @@
+name: Deploy JSON Server to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install -g json-server
+
+      - name: Generate static JSON files
+        run: |
+          mkdir -p public/api
+          cp db.json public/
+          
+          # Generate courses endpoint
+          jq '.courses' db.json > public/api/courses.json
+          
+          # Generate course-specific quiz endpoints
+          jq '.courses[] | .id' db.json -r | while read -r courseId; do
+            jq ".quizzes | map(select(.courseId == \"$courseId\"))" db.json > public/api/courses/$courseId/quizzes.json
+            mkdir -p public/api/courses/$courseId
+          done
+          
+          # Generate individual quiz endpoints
+          jq '.quizzes[] | .id' db.json -r | while read -r quizId; do
+            jq ".quizzes[] | select(.id == \"$quizId\")" db.json > public/api/quizzes/$quizId.json
+            mkdir -p public/api/quizzes
+          done
+          
+          # Create index.html
+          echo '<!DOCTYPE html><html><head><title>MiniApp API</title></head><body><h1>MiniApp API</h1><p>API endpoints available at /api/...</p></body></html>' > public/index.html
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: public
