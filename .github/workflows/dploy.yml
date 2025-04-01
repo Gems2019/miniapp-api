@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+# Add this permissions block
+permissions:
+  contents: write
+  pages: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -29,14 +34,15 @@ jobs:
           jq '.courses' db.json > public/api/courses.json
           
           # Generate course-specific quiz endpoints
+          mkdir -p public/api/courses
           jq '.courses[] | .id' db.json -r | while read -r courseId; do
             mkdir -p public/api/courses/$courseId
             jq ".quizzes | map(select(.courseId == \"$courseId\"))" db.json > public/api/courses/$courseId/quizzes.json
           done
           
           # Generate individual quiz endpoints
+          mkdir -p public/api/quizzes
           jq '.quizzes[] | .id' db.json -r | while read -r quizId; do
-            mkdir -p public/api/quizzes
             jq ".quizzes[] | select(.id == \"$quizId\")" db.json > public/api/quizzes/$quizId.json
           done
           
