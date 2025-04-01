@@ -1,0 +1,255 @@
+[
+  {
+    "id": "quiz1",
+    "courseId": "COMP3522",
+    "courseName": "COMP-3522 OOP",
+    "weekNumber": 1,
+    "title": "Introduction to OOP"
+  },
+  {
+    "id": "quiz2",
+    "courseId": "COMP3522",
+    "weekNumber": 2,
+    "courseName": "COMP-3522 OOP",
+    "title": "Inheritance and Polymorphism"
+  },
+  {
+    "id": "quiz4",
+    "courseId": "COMP3522",
+    "courseName": "COMP-3522 OOP",
+    "weekNumber": 9,
+    "title": "Structural Design Patterns",
+    "questions": [
+      {
+        "id": "q1",
+        "text": "What is the primary focus of Structural Design Patterns?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Object communication and interaction"
+          },
+          {
+            "id": "b",
+            "text": "Class instantiation techniques"
+          },
+          {
+            "id": "c",
+            "text": "Organizing code for flexibility and maintainability"
+          },
+          {
+            "id": "d",
+            "text": "Optimizing algorithm performance"
+          }
+        ],
+        "correctAnswer": "c"
+      },
+      {
+        "id": "q2",
+        "text": "Which of the following is NOT a Structural Pattern covered in the slides?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Proxy"
+          },
+          {
+            "id": "b",
+            "text": "Facade"
+          },
+          {
+            "id": "c",
+            "text": "Bridge"
+          },
+          {
+            "id": "d",
+            "text": "Observer"
+          }
+        ],
+        "correctAnswer": "d"
+      },
+      {
+        "id": "q3",
+        "text": "What is the key purpose of a Proxy pattern?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Simplify access to a complex API"
+          },
+          {
+            "id": "b",
+            "text": "Separate abstractions from implementations"
+          },
+          {
+            "id": "c",
+            "text": "Control access to a resource or service"
+          },
+          {
+            "id": "d",
+            "text": "Improve recursion efficiency"
+          }
+        ],
+        "correctAnswer": "c"
+      },
+      {
+        "id": "q4",
+        "text": "When implementing a Proxy, what is a common reason for using it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "To reduce code complexity"
+          },
+          {
+            "id": "b",
+            "text": "To increase system speed by caching results"
+          },
+          {
+            "id": "c",
+            "text": "To eliminate the need for object-oriented programming"
+          },
+          {
+            "id": "d",
+            "text": "To replace an entire class hierarchy"
+          }
+        ],
+        "correctAnswer": "b"
+      },
+      {
+        "id": "q5",
+        "text": "How does the Facade pattern help simplify a system?",
+        "options": [
+          {
+            "id": "a",
+            "text": "By exposing multiple complex subsystems to the user"
+          },
+          {
+            "id": "b",
+            "text": "By creating a single entry point that hides complex implementations"
+          },
+          {
+            "id": "c",
+            "text": "By adding multiple layers of wrappers"
+          },
+          {
+            "id": "d",
+            "text": "By combining multiple unrelated design patterns"
+          }
+        ],
+        "correctAnswer": "b"
+      },
+      {
+        "id": "q6",
+        "text": "Which of the following is a disadvantage of the Facade pattern?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It increases code complexity by introducing unnecessary classes"
+          },
+          {
+            "id": "b",
+            "text": "It can become a highly coupled class and hard to maintain"
+          },
+          {
+            "id": "c",
+            "text": "It makes debugging more difficult due to direct object interactions"
+          },
+          {
+            "id": "d",
+            "text": "It slows down system performance significantly"
+          }
+        ],
+        "correctAnswer": "b"
+      },
+      {
+        "id": "q7",
+        "text": "In the Bridge pattern, what are the two key hierarchies?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Proxy and Wrappee"
+          },
+          {
+            "id": "b",
+            "text": "Abstract and Concrete Classes"
+          },
+          {
+            "id": "c",
+            "text": "Abstraction and Implementation"
+          },
+          {
+            "id": "d",
+            "text": "Client and Server"
+          }
+        ],
+        "correctAnswer": "c"
+      },
+      {
+        "id": "q8",
+        "text": "What problem does the Bridge pattern solve?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It reduces the number of required classes in a growing hierarchy"
+          },
+          {
+            "id": "b",
+            "text": "It replaces inheritance with interfaces"
+          },
+          {
+            "id": "c",
+            "text": "It simplifies debugging of complex APIs"
+          },
+          {
+            "id": "d",
+            "text": "It improves recursion efficiency"
+          }
+        ],
+        "correctAnswer": "a"
+      },
+      {
+        "id": "q9",
+        "text": "What is a major advantage of the Proxy pattern?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It removes the need for a database in an application"
+          },
+          {
+            "id": "b",
+            "text": "It ensures every object has direct access to the wrappee"
+          },
+          {
+            "id": "c",
+            "text": "It enables access control and optimizations like caching"
+          },
+          {
+            "id": "d",
+            "text": "It makes all code single-threaded for better performance"
+          }
+        ],
+        "correctAnswer": "c"
+      },
+      {
+        "id": "q10",
+        "text": "What is a common example of the Bridge pattern?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A movie database restricting user access"
+          },
+          {
+            "id": "b",
+            "text": "A remote control acting as an abstraction for a device"
+          },
+          {
+            "id": "c",
+            "text": "A simple interface simplifying access to a complex API"
+          },
+          {
+            "id": "d",
+            "text": "A caching mechanism speeding up database queries"
+          }
+        ],
+        "correctAnswer": "b"
+      }
+    ]
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "COMP3522",
+    "title": "COMP-3522 Object-Oriented Programming",
+    "description": "Learn advanced OOP concepts and design patterns",
+    "shortName": "OOP"
+  },
+  {
+    "id": "COMP3721",
+    "title": "COMP-3721 Data Communications",
+    "description": "Explore networking protocols and data transmission",
+    "shortName": "DC"
+  },
+  {
+    "id": "COMP3717",
+    "title": "COMP-3717 Mobile Android",
+    "description": "Develop applications for Android platform using Kotlin",
+    "shortName": "MA"
+  }
+]
