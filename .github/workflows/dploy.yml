@@ -30,14 +30,14 @@ jobs:
           
           # Generate course-specific quiz endpoints
           jq '.courses[] | .id' db.json -r | while read -r courseId; do
-            jq ".quizzes | map(select(.courseId == \"$courseId\"))" db.json > public/api/courses/$courseId/quizzes.json
             mkdir -p public/api/courses/$courseId
+            jq ".quizzes | map(select(.courseId == \"$courseId\"))" db.json > public/api/courses/$courseId/quizzes.json
           done
           
           # Generate individual quiz endpoints
           jq '.quizzes[] | .id' db.json -r | while read -r quizId; do
-            jq ".quizzes[] | select(.id == \"$quizId\")" db.json > public/api/quizzes/$quizId.json
             mkdir -p public/api/quizzes
+            jq ".quizzes[] | select(.id == \"$quizId\")" db.json > public/api/quizzes/$quizId.json
           done
           
           # Create index.html
