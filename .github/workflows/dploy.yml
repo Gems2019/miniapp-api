@@ -56,9 +56,9 @@ jobs:
             <h1>MiniApp API</h1>
             <p>Available API endpoints:</p>
             <ul>
-              <li><a href="api/courses">Courses</a></li>
-              <li>Course quizzes: <code>/api/courses/{courseId}/quizzes</code></li>
-              <li>Individual quiz: <code>/api/quizzes/{quizId}</code></li>
+              <li><a href="api/courses.json">Courses</a></li>
+              <li>Course quizzes: <code>/api/courses/{courseId}/quizzes.json</code></li>
+              <li>Individual quiz: <code>/api/quizzes/{quizId}.json</code></li>
             </ul>
           </body>
           </html>' > public/index.html
