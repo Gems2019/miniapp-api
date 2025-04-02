@@ -27,29 +27,36 @@ jobs:
 
       - name: Generate static JSON files
         run: |
-          mkdir -p public/miniapp-api/api
-          cp db.json public/miniapp-api/
+          mkdir -p public/api
+          cp db.json public/
           
           # Generate courses endpoint
-          jq '.courses' db.json > public/miniapp-api/api/courses.json
+          jq '.courses' db.json > public/api/courses.json
           
           # Generate course-specific quiz endpoints
-          mkdir -p public/miniapp-api/api/courses
+          mkdir -p public/api/courses
           jq '.courses[] | .id' db.json -r | while read -r courseId; do
-            mkdir -p public/miniapp-api/api/courses/$courseId
-            jq ".quizzes | map(select(.courseId == \"$courseId\"))" db.json > public/miniapp-api/api/courses/$courseId/quizzes.json
+            mkdir -p public/api/courses/$courseId
+            jq ".quizzes | map(select(.courseId == \"$courseId\"))" db.json > public/api/courses/$courseId/quizzes.json
           done
           
           # Generate individual quiz endpoints
-          mkdir -p public/miniapp-api/api/quizzes
+          mkdir -p public/api/quizzes
           jq '.quizzes[] | .id' db.json -r | while read -r quizId; do
-            jq ".quizzes[] | select(.id == \"$quizId\")" db.json > public/miniapp-api/api/quizzes/$quizId.json
+            jq ".quizzes[] | select(.id == \"$quizId\")" db.json > public/api/quizzes/$quizId.json
           done
           
           # Create index.html
-          echo '<!DOCTYPE html><html><head><title>MiniApp API</title></head><body><h1>MiniApp API</h1><p>API endpoints available at /api/...</p></body></html>' > public/miniapp-api/index.html
+          echo '<!DOCTYPE html><html><head><title>MiniApp API</title></head><body><h1>MiniApp API</h1><p>API endpoints available at /api/...</p></body></html>' > public/index.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: 'public'
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: public/miniapp-api
+        id: deployment
+        uses: actions/deploy-pages@v2
