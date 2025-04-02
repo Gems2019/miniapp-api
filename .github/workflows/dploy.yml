@@ -5,18 +5,13 @@ on:
     branches:
       - main
 
-# Add this permissions block
+# Keep these permissions
 permissions:
   contents: write
-  pages: write
-  id-token: write # Required for GitHub Pages deployment
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -27,13 +22,13 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        run: npm install -g json-server
+        run: npm install -g json-server jq
 
       - name: Generate static JSON files
         run: |
           mkdir -p public/api
           cp db.json public/
-          touch public/.nojekyll  # Add this line
+          touch public/.nojekyll
           
           # Generate courses endpoint
           jq '.courses' db.json > public/api/courses.json
@@ -51,22 +46,31 @@ jobs:
             jq ".quizzes[] | select(.id == \"$quizId\")" db.json > public/api/quizzes/$quizId.json
           done
           
-          # Create index.html
-          echo '<!DOCTYPE html><html><head><title>MiniApp API</title></head><body><h1>MiniApp API</h1><p>API endpoints available at /api/...</p></body></html>' > public/index.html
+          # Create index.html with links to API endpoints
+          echo '<!DOCTYPE html>
+          <html>
+          <head>
+            <title>MiniApp API</title>
+          </head>
+          <body>
+            <h1>MiniApp API</h1>
+            <p>Available API endpoints:</p>
+            <ul>
+              <li><a href="api/courses">Courses</a></li>
+              <li>Course quizzes: <code>/api/courses/{courseId}/quizzes</code></li>
+              <li>Individual quiz: <code>/api/quizzes/{quizId}</code></li>
+            </ul>
+          </body>
+          </html>' > public/index.html
 
       - name: Debug information
         run: |
           echo "Current directory structure:"
           find public -type f | sort
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          path: 'public'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          folder: public # The folder to deploy
+          branch: gh-pages # The branch to deploy to
+          clean: true # Automatically remove deleted files from the deploy branch
