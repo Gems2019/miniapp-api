@@ -33,6 +33,7 @@ jobs:
         run: |
           mkdir -p public/api
           cp db.json public/
+          touch public/.nojekyll  # Add this line
           
           # Generate courses endpoint
           jq '.courses' db.json > public/api/courses.json
@@ -52,6 +53,11 @@ jobs:
           
           # Create index.html
           echo '<!DOCTYPE html><html><head><title>MiniApp API</title></head><body><h1>MiniApp API</h1><p>API endpoints available at /api/...</p></body></html>' > public/index.html
+
+      - name: Debug information
+        run: |
+          echo "Current directory structure:"
+          find public -type f | sort
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
